@@ -5,6 +5,7 @@ import NavBar from "./Components/NavBar";
 import Footer from "./Components/Footer";
 import MainPage from "./Components/MainPage";
 import DetailPage from "./Components/DetailPage";
+import NotFound from "./Components/ErrorPage";
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
         <NavBar />
         <Routes>
           <Route element={<MainPage city="rome" />} path="/" />
-          <Route element={<DetailPage />} path="/city/:detail" />
+          <Route element={<DetailPage />} path="/:detail" />
+          <Route element={<NotFound />} path="*" />
         </Routes>
         <Footer />
       </BrowserRouter>

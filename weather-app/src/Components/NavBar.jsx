@@ -4,12 +4,25 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const NavBar = () => {
   const location = useLocation();
   console.log(location);
+  const navigate = useNavigate();
+
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleChanges = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (searchQuery) {
+      navigate(`/${searchQuery}`);
+    }
+  };
 
   return (
     <>
@@ -30,18 +43,19 @@ const NavBar = () => {
               <Link to="/">
                 <div className="text-light nav-link">Home</div>
               </Link>
-              <Link to="/city/:detail">
+              <Link to="/:detail">
                 <div className="text-light nav-link">My City</div>
               </Link>
             </Nav>
-            <Form className="d-flex ml-auto">
+            <Form className="d-flex ml-auto" onSubmit={handleSubmit}>
               <Form.Control
                 type="search"
                 placeholder="Search here..."
                 className="me-2"
                 aria-label="Search"
+                onChange={handleChanges}
               />
-              <Button variant="outline-light" className="ml-2">
+              <Button variant="outline-light" className="ml-2" type="submit">
                 Search
               </Button>
             </Form>

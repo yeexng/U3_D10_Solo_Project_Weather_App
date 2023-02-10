@@ -15,7 +15,7 @@ const DetailPage = () => {
   const fetchData = async () => {
     try {
       let response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${params.detail}&APPID=4f3ad75b1f3061f3960859bcabb27b3d`
+        `https://api.openweathermap.org/data/2.5/weather?q=${params.detail}&APPID=4f3ad75b1f3061f3960859bcabb27b3d&units=metric`
       );
       console.log(response);
       if (response.ok) {
@@ -58,8 +58,8 @@ const DetailPage = () => {
             <div>
               {weatherInfo.main && (
                 <p>
-                  Temperature: {weatherInfo.main.temp} °F<br></br>
-                  Feels like: {weatherInfo.main.feels_like} °F<br></br>
+                  Temperature: {weatherInfo.main.temp} °C<br></br>
+                  Feels like: {weatherInfo.main.feels_like} °C<br></br>
                   Humidity: {weatherInfo.main.humidity} %<br></br>
                   Pressure: {weatherInfo.main.pressure} hPa
                   <br></br>

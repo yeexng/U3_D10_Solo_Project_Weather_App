@@ -17,7 +17,7 @@ const MainPage = (props) => {
   const fetchData = async () => {
     try {
       let response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${props.city}&APPID=4f3ad75b1f3061f3960859bcabb27b3d`
+        `https://api.openweathermap.org/data/2.5/weather?q=${props.city}&APPID=4f3ad75b1f3061f3960859bcabb27b3d&units=metric`
       );
       console.log(response);
       if (response.ok) {
@@ -60,8 +60,8 @@ const MainPage = (props) => {
               <div>
                 {weatherInfo.main && (
                   <p>
-                    Temperature: {weatherInfo.main.temp} °F<br></br>
-                    Feels like: {weatherInfo.main.feels_like} °F<br></br>
+                    Temperature: {weatherInfo.main.temp} °C<br></br>
+                    Feels like: {weatherInfo.main.feels_like} °C<br></br>
                   </p>
                 )}
               </div>
@@ -69,7 +69,7 @@ const MainPage = (props) => {
 
             <Button
               onClick={() => {
-                navigate(`/city/${weatherInfo.name}`);
+                navigate(`/${weatherInfo.name}`);
               }}
             >
               More Details
