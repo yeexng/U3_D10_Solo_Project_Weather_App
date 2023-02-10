@@ -18,7 +18,7 @@ const Footer = () => {
       >
         &copy; {new Date().getFullYear()} Copyright:{" "}
         <a className="text-dark" href="https://mdbootstrap.com/">
-          MDBootstrap.com
+          Xuan.nG
         </a>
       </div>
     </MDBFooter>
