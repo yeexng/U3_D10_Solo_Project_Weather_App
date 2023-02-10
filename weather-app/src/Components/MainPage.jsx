@@ -4,16 +4,20 @@ import Spinner from "react-bootstrap/esm/Spinner";
 import Container from "react-bootstrap/esm/Container";
 import Card from "react-bootstrap/esm/Card";
 import Alert from "react-bootstrap/esm/Alert";
+import Button from "react-bootstrap/esm/Button";
+import { useNavigate } from "react-router-dom";
 
-const MainPage = () => {
+const MainPage = (props) => {
   const [weatherInfo, setWeatherInfo] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
+  const navigate = useNavigate();
+
   const fetchData = async () => {
     try {
       let response = await fetch(
-        "https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=4f3ad75b1f3061f3960859bcabb27b3d"
+        `https://api.openweathermap.org/data/2.5/weather?q=${props.city}&APPID=4f3ad75b1f3061f3960859bcabb27b3d`
       );
       console.log(response);
       if (response.ok) {
@@ -45,17 +49,31 @@ const MainPage = () => {
           <Alert variant="danger">Aww snap, we got an error!😨</Alert>
         )}
 
-        <Card className="bg-dark text-white">
-          <Card.Img
-            src="https://images.unsplash.com/photo-1533324268742-60b233802eef?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-            alt="Card image"
-          />
+        <Card className="bg-dark text-white my-5">
+          <Card.Img src="https://picsum.photos/500/150" alt="Card image" />
           <Card.ImgOverlay>
             <Card.Title>
               <h1>{weatherInfo.name}</h1>
             </Card.Title>
-            <Card.Text>{}</Card.Text>
-            <Card.Text>{}</Card.Text>
+
+            <Card.Text>
+              <div>
+                {weatherInfo.main && (
+                  <p>
+                    Temperature: {weatherInfo.main.temp} °F<br></br>
+                    Feels like: {weatherInfo.main.feels_like} °F<br></br>
+                  </p>
+                )}
+              </div>
+            </Card.Text>
+
+            <Button
+              onClick={() => {
+                navigate(`/city/${weatherInfo.name}`);
+              }}
+            >
+              More Details
+            </Button>
           </Card.ImgOverlay>
         </Card>
       </Container>
